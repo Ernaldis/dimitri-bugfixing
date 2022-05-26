@@ -1,0 +1,104 @@
+version: "2.4"
+services:
+    setup:
+      image: ernaldis/datajoint
+      env_file: .env
+      environment:
+        - DJ_HOST
+        - DJ_USER
+        - DJ_PASS
+      volumes:
+        - ./start.py:/main/start.py
+      command:
+        python3 start.py
+  test100: &test-definition
+    image: ernaldis/datajoint
+    volumes:
+      - ./tmp.py:/main/tmp.py
+    env_file: .env
+    environment: &default-definition
+      DJ_HOST:
+      DJ_USER:
+      DJ_PASS:
+      TIME: 100
+    depends_on:
+      setup:
+        condition: service_completed_successfully
+    command:
+      - bash
+      - -c
+      - |
+        echo "Testing..."
+        echo "$$TIME"
+        python tmp.py $$TIME
+        echo done
+  test200:
+    <<: *test-definition
+    environment:
+      <<: *default-definition
+      TIME: 200
+  test300:
+    <<: *test-definition
+    environment:
+      <<: *default-definition
+      TIME: 300
+  test400:
+    <<: *test-definition
+    environment:
+      <<: *default-definition
+      TIME: 400
+  test500:
+    <<: *test-definition
+    environment:
+      <<: *default-definition
+      TIME: 500
+  test600:
+    <<: *test-definition
+    environment:
+      <<: *default-definition
+      TIME: 600
+  test700:
+    <<: *test-definition
+    environment:
+      <<: *default-definition
+      TIME: 700
+  test800:
+    <<: *test-definition
+    environment:
+      <<: *default-definition
+      TIME: 800
+  test900:
+    <<: *test-definition
+    environment:
+      <<: *default-definition
+      TIME: 900
+  test1000:
+    <<: *test-definition
+    environment:
+      <<: *default-definition
+      TIME: 1000
+  test1100:
+    <<: *test-definition
+    environment:
+      <<: *default-definition
+      TIME: 1100
+  test1200:
+    <<: *test-definition
+    environment:
+      <<: *default-definition
+      TIME: 1200
+  test1300:
+    <<: *test-definition
+    environment:
+      <<: *default-definition
+      TIME: 1300
+  test1400:
+    <<: *test-definition
+    environment:
+      <<: *default-definition
+      TIME: 1400
+  test1500:
+    <<: *test-definition
+    environment:
+      <<: *default-definition
+      TIME: 1500
