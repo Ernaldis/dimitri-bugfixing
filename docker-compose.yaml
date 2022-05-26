@@ -1,16 +1,16 @@
 version: "2.4"
 services:
-    setup:
-      image: ernaldis/datajoint
-      env_file: .env
-      environment:
-        - DJ_HOST
-        - DJ_USER
-        - DJ_PASS
-      volumes:
-        - ./start.py:/main/start.py
-      command:
-        python3 start.py
+  setup:
+    image: ernaldis/datajoint
+    env_file: .env
+    environment:
+      - DJ_HOST
+      - DJ_USER
+      - DJ_PASS
+    volumes:
+      - ./start.py:/main/start.py
+    command:
+      python3 start.py
   test100: &test-definition
     image: ernaldis/datajoint
     volumes:
