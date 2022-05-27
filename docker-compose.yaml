@@ -11,6 +11,9 @@ services:
       - NEW_HOME=/home/.anaconda
     volumes:
       - ./start.py:/home/.anaconda/start.py
+    scale: ${WORKER_COUNT:-1}
+    ports:
+      - 8888:8888
     command:
       python3 start.py
   test100: &test-definition
@@ -28,6 +31,7 @@ services:
     depends_on:
       setup:
         condition: service_completed_successfully
+    scale: ${WORKER_COUNT:-1}
     command:
       - bash
       - -c
