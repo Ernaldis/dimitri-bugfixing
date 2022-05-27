@@ -8,13 +8,13 @@ services:
       - DJ_USER
       - DJ_PASS
     volumes:
-      - ./start.py:/main/start.py
+      - ./start.py:/home/anaconda/start.py
     command:
       python3 start.py
   test100: &test-definition
     image: ernaldis/datajoint
     volumes:
-      - ./tmp.py:/main/tmp.py
+      - ./tmp.py:/home/anaconda/tmp.py
     env_file: .env
     environment: &default-definition
       DJ_HOST:

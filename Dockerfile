@@ -1,3 +1,3 @@
-FROM datajoint/djbase:latest
+FROM datajoint/djlab:latest
 
 RUN pip install datajoint
