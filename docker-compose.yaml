@@ -1,7 +1,9 @@
 version: "2.4"
 services:
   setup:
-    image: ernaldis/datajoint
+    build:
+      context: .
+      dockerfile: Dockerfile
     env_file: .env
     environment:
       - DJ_HOST
@@ -17,7 +19,9 @@ services:
     command:
       python3 start.py
   test100: &test-definition
-    image: ernaldis/datajoint
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - ./test.py:/home/.anaconda/test.py
     env_file: .env
@@ -30,7 +34,6 @@ services:
       NEW_HOME: /home/.anaconda
     depends_on:
       setup:
-        condition: service_completed_successfully
     scale: ${WORKER_COUNT:-1}
     command:
       - bash
