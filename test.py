@@ -2,12 +2,6 @@ import datajoint as dj
 import time
 import sys
 
-#print(dj.list_schemas())
-#if "ernaldis_test" in dj.list_schemas():
-#    print("Dropping schema")
-#    schema = dj.Schema("ernaldis_test")
-#    dj.schema.drop
-#print("Creating schema")
 schema = dj.Schema("ernaldis_test")
 
 @schema
