@@ -7,20 +7,24 @@ services:
       - DJ_HOST
       - DJ_USER
       - DJ_PASS
+      - NEW_USER=datajoint
+      - NEW_HOME=/home/.anaconda
     volumes:
-      - ./start.py:/home/anaconda/start.py
+      - ./start.py:/home/.anaconda/start.py
     command:
       python3 start.py
   test100: &test-definition
     image: ernaldis/datajoint
     volumes:
-      - ./tmp.py:/home/anaconda/tmp.py
+      - ./test.py:/home/.anaconda/test.py
     env_file: .env
     environment: &default-definition
       DJ_HOST:
       DJ_USER:
       DJ_PASS:
       TIME: 100
+      NEW_USER: datajoint
+      NEW_HOME: /home/.anaconda
     depends_on:
       setup:
         condition: service_completed_successfully
@@ -30,7 +34,7 @@ services:
       - |
         echo "Testing..."
         echo "$$TIME"
-        python tmp.py $$TIME
+        python test.py $$TIME
         echo done
   test200:
     <<: *test-definition

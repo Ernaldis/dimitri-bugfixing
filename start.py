@@ -2,12 +2,6 @@ import datajoint as dj
 
 dj.config['safemode']=False
 
-print(dj.list_schemas())
-if "ernaldis_test" in dj.list_schemas():
-    print("Dropping schema")
-    schema = dj.Schema("ernaldis_test")
-    schema.drop()
-print("Creating schema")
 schema = dj.Schema("ernaldis_test")
 
 @schema
@@ -45,3 +39,5 @@ class Stats(dj.Computed):
         time.sleep(key)
         url = (Website & key).fetch1('url')
         self.insert1(key)
+
+Stats.delete()
